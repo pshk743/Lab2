@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-
-namespace CatAndMouseGame
+﻿namespace CatAndMouseGame1
 {
     class Program
     {

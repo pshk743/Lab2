@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace CatAndMouseGame
+namespace CatAndMouseGame1
 {
     public class Game
     {

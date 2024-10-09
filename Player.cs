@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CatAndMouseGame
+namespace CatAndMouseGame1
 {
     public enum PlayerState
     {
