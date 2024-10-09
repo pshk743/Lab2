@@ -12,7 +12,7 @@ namespace CatAndMouseGame
         {
             this.gridSize = gridSize;
             cat = new Player("Cat");
-            mouse = new Player("Mouse");
+            mouse = new Player("Mouse1");
         }
 
         public void ProcessMove(char playerType, int step)
