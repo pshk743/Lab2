@@ -1,4 +1,6 @@
-﻿namespace CatAndMouseGame1
+﻿using System;
+using System.IO;
+namespace CatAndMouseGame
 {
     class Program
     {

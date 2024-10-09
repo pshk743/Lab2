@@ -1,6 +1,5 @@
 ﻿using System;
-
-namespace CatAndMouseGame1
+namespace CatAndMouseGame
 {
     public enum PlayerState
     {
@@ -9,7 +8,6 @@ namespace CatAndMouseGame1
         Winner,
         Loser
     }
-
     public class Player
     {
         private string name;
