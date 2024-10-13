@@ -7,9 +7,8 @@ namespace CatAndMouseGame
     {
         static void Main(string[] args)
         {
-            int count_file = 3;
+            int count_file = 3; 
 
-            //Game game = new Game();
             for (int i = 0; i < count_file; i++)
             {
                 Game game = new Game();
