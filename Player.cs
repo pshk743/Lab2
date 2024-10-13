@@ -1,14 +1,14 @@
 ﻿using System;
 namespace CatAndMouseGame
 {
-    public enum PlayerState
+    enum PlayerState
     {
         NotInGame,
         Playing,
         Winner,
         Loser
     }
-    public class Player
+    class Player
     {
         private string name;
         public int position;
