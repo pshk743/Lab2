@@ -8,6 +8,7 @@ namespace CatAndMouseGame
         Start,
         End
     }
+
     class Game
     {
         private Player cat;

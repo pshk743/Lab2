@@ -9,9 +9,10 @@ namespace CatAndMouseGame
         {
             int count_file = 3;
 
-            Game game = new Game();
+            //Game game = new Game();
             for (int i = 0; i < count_file; i++)
             {
+                Game game = new Game();
                 game.StartGame($"{i + 1}.ChaseData.txt", $"{i + 1}.PursuitLog.txt");
             }
         }
