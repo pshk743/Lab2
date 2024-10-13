@@ -8,11 +8,12 @@ namespace CatAndMouseGame
         static void Main(string[] args)
         {
             int count_file = 3;
-            string inputFilePath = "2.ChaseData.txt";
-            string outputFilePath = "2.PursuitLog.txt";
 
             Game game = new Game();
-            game.StartGame(inputFilePath, outputFilePath);
+            for (int i = 0; i < count_file; i++)
+            {
+                game.StartGame($"{i + 1}.ChaseData.txt", $"{i + 1}.PursuitLog.txt");
+            }
         }
     }
 }

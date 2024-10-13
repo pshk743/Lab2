@@ -8,61 +8,59 @@ namespace CatAndMouseGame
         Start,
         End
     }
-
     class Game
     {
         private Player cat;
         private Player mouse;
         private int gridSize;
         private GameState currentState;
-
         public Game()
         {
             cat = new Player("Cat");
             mouse = new Player("Mouse");
             currentState = GameState.Start;
         }
-
         public void StartGame(string inputFilePath, string outputFilePath)
         {
-            string[] commands = File.ReadAllLines(inputFilePath);
-            gridSize = int.Parse(commands[0].Trim());
+            using StreamReader reader = new StreamReader(inputFilePath);
+            using StreamWriter writer = new StreamWriter(outputFilePath);
+
+            string firstLine = reader.ReadLine();
+            gridSize = int.Parse(firstLine.Trim());
             currentState = GameState.Start;
 
-            using (StreamWriter writer = new StreamWriter(outputFilePath))
+            writer.WriteLine("Cat and Mouse\n\n");
+            writer.WriteLine($"{"Cat",-10} {"Mouse",-10} {"Distance",-10}");
+            writer.WriteLine(new string('-', 30));
+
+            string[] lines = File.ReadAllLines(inputFilePath);
+
+            for (int i = 1; i < lines.Length; i++) 
             {
-                writer.WriteLine("Cat and Mouse\n\n");
-                writer.WriteLine($"{"Cat",-10} {"Mouse",-10} {"Distance",-10}");
-                writer.WriteLine(new string('-', 30));
+                string line = lines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
 
-                for (int i = 1; i < commands.Length; i++)
+                string[] parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                if (parts.Length < 1) continue;
+
+                char player = parts[0][0];
+
+                if (player == 'P')
                 {
-                    string command = commands[i].Trim();
-                    if (string.IsNullOrEmpty(command)) continue;
-
-                    string[] parts = command.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length < 1) continue;
-
-                    char player = parts[0][0];
-
-                    if (player == 'P')
+                    PrintState(writer);
+                }
+                else if (parts.Length > 1 && int.TryParse(parts[1], out int step))
+                {
+                    ProcessMove(player, step);
+                    if (IsMouseCaught())
                     {
-                        PrintState(writer);
-                    }
-                    else if (parts.Length > 1 && int.TryParse(parts[1], out int step))
-                    {
-                        ProcessMove(player, step);
-                        if (IsMouseCaught())
-                        {
-                            currentState = GameState.End;
-                            break;
-                        }
+                        currentState = GameState.End;
+                        break;
                     }
                 }
-                EndGame(writer);
             }
+            EndGame(writer);
         }
-
         public void ProcessMove(char playerType, int step)
         {
             switch (playerType)
@@ -82,7 +80,6 @@ namespace CatAndMouseGame
                     break;
             }
         }
-
         public void PrintState(StreamWriter writer)
         {
             int distance = CalculateDistance();
@@ -92,7 +89,6 @@ namespace CatAndMouseGame
 
             writer.WriteLine($" {catPosition,-12} {mousePosition,-13} {distanceOutput,-9}");
         }
-
         private int CalculateDistance()
         {
             if (cat.state == PlayerState.Playing && mouse.state == PlayerState.Playing)
@@ -101,12 +97,10 @@ namespace CatAndMouseGame
             }
             return 0;
         }
-
         public bool IsMouseCaught()
         {
             return cat.position == mouse.position && cat.state == PlayerState.Playing && mouse.state == PlayerState.Playing;
         }
-
         public void EndGame(StreamWriter writer)
         {
             writer.WriteLine($"{new string('-', 30)}\n\n\n");
